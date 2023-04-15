@@ -8,13 +8,10 @@ const app = new Application({
   EventsPath: "./commands",
 })
 
-
-(async function ()  {
- app.build()
-
-
-console.log(app.paths)
-
-console.log(readPath('commands'))
-  
-})()
+async function test() {
+  await app.build()
+  console.log(app.paths)
+  const cmd = new Command()
+  console.log(cmd.toJSON())
+}
+test()

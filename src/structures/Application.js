@@ -5,7 +5,7 @@ const { DiscordjsTypeError, ErrorCodes } = require('discord.js/src/errors');
 
 class Application {
   
-  constructor({ client, commandsPath, EventsPath }) {
+  constructor({ client, commandsPath, EventsPath } = {}) {
     const main = this
     this.main = main
     this._patch(main, "client", client);    
@@ -38,6 +38,10 @@ class Application {
       this.paths.commandsPath = this.commandsPath;
       this.paths.EventsPath = this.EventsPath;
   };
+  
+  toJSON() {
+    return this.data
+  }
   
   
 }
