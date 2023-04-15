@@ -6,8 +6,8 @@ const { DiscordjsTypeError, ErrorCodes } = require('discord.js/src/errors');
 class Application {
   
   constructor({ client, commandsPath, EventsPath } = {}) {
-    const main = this
-    this.main = main
+    const main = this;
+    this.main = main;
     this._patch(main, "client", client);    
     this._patch(main, "commandsPath", commandsPath);    
     this._patch(main, "EventsPath", EventsPath);    
@@ -23,7 +23,12 @@ class Application {
     });
   };
   
+  
   async build() {
+   await this._build();
+  }
+  
+  async _build() {
       if (!this.client) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "Client", "parameters", true);
       if (!this.commandsPath) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "commandsPath","parameters", true);
       if (!this.EventsPath) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "EventsPath", "parameters", true);
