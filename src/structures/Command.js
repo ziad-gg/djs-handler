@@ -1,7 +1,11 @@
 const Application = require('./Application.js');
 
-class Command extends Application {
+class Command  {
+  
   constructor() {
-    this.main._patch(this, "")
   }
+  
 }
+
+
+module.exports = Command

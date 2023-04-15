@@ -1,15 +1,20 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const { Application, readPath } = require('./src/index.js');
+const { Application, readPath, Command } = require('./src/index.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const app = new Application({
-  client,
+  client: client,
   commandsPath: "./commands",
   EventsPath: "./commands",
 })
 
-app.build()
 
-console.log(app)
+(async function ()  {
+ app.build()
+
+
+console.log(app.paths)
 
 console.log(readPath('commands'))
+  
+})()
