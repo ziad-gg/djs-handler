@@ -1,1 +1,2 @@
-module.exports.Application = require('./structures/Application')
+// 
+module.exports.Application = require('./structures/Application');
