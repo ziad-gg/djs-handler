@@ -1,4 +1,3 @@
-
 const fs = require('node:fs');
 const path = require('node:path');
 const { Collection, Client } = require('discord.js');
@@ -6,10 +5,12 @@ const { DiscordjsTypeError, ErrorCodes } = require('discord.js/src/errors');
 
 class Application {
   
-  constructor({ client, commandPath, EventsPath }) {
-    this._patch(this, "client", client);    
-    this._patch(this, "commandPath", commandPath);    
-    this._patch(this, "EventsPath", EventsPath);    
+  constructor({ client, commandsPath, EventsPath }) {
+    const main = this
+    this.main = main
+    this._patch(main, "client", client);    
+    this._patch(main, "commandsPath", commandsPath);    
+    this._patch(main, "EventsPath", EventsPath);    
   }
   
   async _patch(obj, key, value) {
@@ -24,9 +25,18 @@ class Application {
   
   async build() {
       if (!this.client) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "Client", "is Missing parameters");
-      if (!this.commandPath) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "commandPath", "is Missing parameters");
+      if (!this.commandsPath) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "commandsPath", "is Missing parameters");
       if (!this.EventsPath) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "EventsPath", "is Missing parameters");
-      
+      if (!(this.client instanceof Client)) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "Client", "is not A discord.js Client");
+    
+      this._path(this.main, "data", new Collection());
+      this._patch(this.main, "paths", new Object());
+    
+      await fs.readdirSync(this.commandsPath);
+      await fs.readdirSync(this.EventsPath);
+    
+      this.paths.commandsPath = this.commandsPath;
+      this.paths.EventsPath = this.EventsPath;
   };
   
   
