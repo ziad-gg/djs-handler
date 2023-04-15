@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const { Application } = require('./src/index.js');
+const { Application, readPath } = require('./src/index.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const app = new Application({
@@ -11,3 +11,5 @@ const app = new Application({
 app.build()
 
 console.log(app)
+
+console.log(readPath('commands'))
