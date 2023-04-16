@@ -28,6 +28,10 @@ class Application {
    await this._build();
   }
   
+  setData(obj = {}) {
+    // Soon
+  }
+  
   async _build() {
       if (!this.client) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "Client", "parameters", true);
       if (!this.commandsPath) throw new DiscordjsTypeError(ErrorCodes.InvalidType, "commandsPath","parameters", true);
